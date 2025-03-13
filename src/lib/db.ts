@@ -3,7 +3,7 @@ import postgres from 'postgres';
 const DB_URL = process.env.NEXT_PUBLIC_DB_URL;
 
 if (!DB_URL) {
-    throw new Error('NEXT_PUBLIC_DB_URL is not defined in environment variables');
+  throw new Error('NEXT_PUBLIC_DB_URL is not defined in environment variables');
 }
 
 // Postgres client instance

@@ -9,3 +9,4 @@ if (!DB_URL) {
 // Postgres client instance
 // This is a singleton instance, so it will be reused across the application.
 export const sql = postgres(DB_URL);
+export default sql;

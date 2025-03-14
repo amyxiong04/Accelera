@@ -4,6 +4,9 @@ import './globals.css';
 
 // This should run before the nextjs app is mounted.
 import '../lib/startup';
+import { SchemaUpdater } from '@/components/app/schema-updater';
+
+// Schema
 
 const figtreeFont = Figtree({
   variable: '--font-figtree',
@@ -22,8 +25,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="dark">
-      <body className={`${figtreeFont.variable} ${figtreeFont.className} h-screen w-screen`}>
+      <body
+        className={`${figtreeFont.variable} ${figtreeFont.className} relative h-screen w-screen`}
+      >
         <main>{children}</main>
+        <SchemaUpdater />
       </body>
     </html>
   );

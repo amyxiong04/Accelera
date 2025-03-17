@@ -1,6 +1,5 @@
 'use client';
 
-import { useState } from 'react';
 import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -8,37 +7,29 @@ import { Label } from '@/components/ui/label';
 import { Card, CardContent, CardHeader } from '../ui/card';
 import Link from 'next/link';
 import { handleLogin } from '@/actions/users/login-action';
+import { useServerAction } from '@/hooks/useServerAction';
+import { useAuth } from '@/context/AuthContext';
 
 export function LoginForm({ className, ...props }: React.ComponentProps<'form'>) {
-  const [error, setError] = useState('');
-  const [isSubmitting, setIsSubmitting] = useState(false);
-
-  const clientAction = async (formData: FormData) => {
-    setIsSubmitting(true);
-    setError('');
-
-    try {
-      // Call the server action
-      const result = await handleLogin(formData);
-
-      if (result.error) {
-        setError("Couldn't log in. Please check your credentials.");
-      } else {
-        window.location.href = '/';
-      }
-    } catch (err) {
-      setError('An unexpected error occurred. Please try again.');
-      console.error(err);
-    } finally {
-      setIsSubmitting(false);
-    }
-  };
+  const { login } = useAuth();
+  const {
+    mutateAsync,
+    isPending: isSubmitting,
+    error: actionError,
+    isError,
+  } = useServerAction(handleLogin);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     const form = e.target as HTMLFormElement;
     const formData = new FormData(form);
-    clientAction(formData);
+
+    mutateAsync(formData).then((result) => {
+      if (!result.error && result.data?.user) {
+        login(result.data);
+        window.location.href = '/';
+      }
+    });
   };
 
   return (
@@ -62,7 +53,7 @@ export function LoginForm({ className, ...props }: React.ComponentProps<'form'>)
               </div>
               <Input id="password" name="password" type="password" required />
             </div>
-            {error && <p className="text-sm text-red-500">{error}</p>}
+            {isError && <p className="text-sm text-red-500">{actionError}</p>}
 
             <Button type="submit" className="w-full" disabled={isSubmitting}>
               {isSubmitting ? 'Logging in...' : 'Login'}

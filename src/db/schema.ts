@@ -1,3 +1,10 @@
+export type UserTableType = {
+  user_id: number;
+  email: string;
+  name?: string;
+  password: string;
+};
+
 /**
  * Schema for the users table.
  * This schema is used to create the users table in the database.

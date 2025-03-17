@@ -1,3 +1,5 @@
+'use server';
+
 import { sql } from '@/lib/db';
 
 import { USER_TABLE_SCHEMA } from '@/db/schema';

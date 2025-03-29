@@ -1,6 +1,7 @@
 'use server';
 
-import { createSchema } from '@/db/init';
+
+import {createSchema } from '@/db/init';
 
 export type CreateSchemaActionReturn = {
   success: boolean;

@@ -17,3 +17,24 @@ export const USER_TABLE_SCHEMA = `
     password VARCHAR(255) NOT NULL
     );
 `;
+
+
+
+
+export type EventTableType = {
+  event_id: number;
+  name: string;
+  event_type?: string;
+  location?: string;
+  date?: string; 
+};
+
+export const EVENT_TABLE_SCHEMA = `
+  CREATE TABLE IF NOT EXISTS Event (
+    event_id SERIAL PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    event_type VARCHAR(100),
+    location VARCHAR(100),
+    date DATE NOT NULL
+  );
+`;

@@ -4,7 +4,7 @@ import { ServerActionResult } from '@/hooks/useServerAction';
 import { sql } from '@/lib/db';
 
 export type JoinEventsData = {
-  startup_name: string;
+  name: string;
 }[];
 
 export async function handleJoin(formData: FormData): Promise<ServerActionResult<JoinEventsData>> {

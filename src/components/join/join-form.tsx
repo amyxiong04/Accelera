@@ -5,8 +5,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Card, CardContent, CardHeader } from '../ui/card';
-import Link from 'next/link';
-import { handleSignup } from '@/actions/users/signup-action';
+import { handleJoin } from '@/actions/join/join-event';
 import { useServerAction } from '@/hooks/useServerAction';
 
 export function JoinForm({ className, ...props }: React.ComponentProps<'form'>) {
@@ -14,9 +13,9 @@ export function JoinForm({ className, ...props }: React.ComponentProps<'form'>) 
     mutateAsync,
     isPending: isSubmitting,
     error: actionError,
+    data: events,
     isError,
-  } = useServerAction(handleSignup);
-
+  } = useServerAction(handleJoin);
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     const form = e.target as HTMLFormElement;
@@ -24,7 +23,7 @@ export function JoinForm({ className, ...props }: React.ComponentProps<'form'>) 
 
     mutateAsync(formData).then((result) => {
       if (!result.error) {
-        window.location.href = '/auth/login'; // Redirect to login after successful signup
+        console.log(result);
       }
     });
   };
@@ -32,35 +31,40 @@ export function JoinForm({ className, ...props }: React.ComponentProps<'form'>) 
   return (
     <Card className="w-full">
       <CardHeader>
-        <h1 className="text-2xl font-bold">Create an account</h1>
-        <p className="text-muted-foreground text-sm text-balance">
-          Enter your details below to create your account
-        </p>
+        <h1 className="text-2xl font-bold">Find the event&apos;s participants</h1>
+        <p className="text-muted-foreground text-sm text-balance">Enter the event name below</p>
       </CardHeader>
       <CardContent className="w-full">
         <form className={cn('flex flex-col gap-6', className)} onSubmit={handleSubmit} {...props}>
           <div className="grid gap-6">
             <div className="grid gap-3">
-              <Label htmlFor="name">Name</Label>
-              <Input id="name" name="name" type="text" placeholder="John Doe" required />
-            </div>
-            <div className="grid gap-3">
-              <Label htmlFor="email">Email</Label>
-              <Input id="email" name="email" type="email" placeholder="m@example.com" required />
+              <Label htmlFor="email">Event Name</Label>
+              <Input id="eventName" name="eventName" type="text" placeholder="name" required />
             </div>
             {isError && <p className="text-sm text-red-500">{actionError}</p>}
-
             <Button type="submit" className="w-full" disabled={isSubmitting}>
-              {isSubmitting ? 'Creating account...' : 'Sign up'}
+              {isSubmitting ? 'Finding...' : 'Find Participants'}
             </Button>
           </div>
-          <div className="text-center text-sm">
-            Already have an account?{' '}
-            <Link href={'/auth/login'} className="underline underline-offset-4">
-              Login
-            </Link>
-          </div>
         </form>
+        {events && (
+          <div className="mt-6">
+            <h2 className="mb-2 text-lg font-bold">Search Results:</h2>
+            <div className="max-h-64 overflow-y-auto rounded-md border p-3">
+              {events.length > 0 ? (
+                <ul className="space-y-2">
+                  {events.map((event, idx) => (
+                    <li key={idx} className="rounded-md border bg-white p-3 text-pink-50">
+                      <strong>{event.startup_name}</strong>
+                    </li>
+                  ))}
+                </ul>
+              ) : (
+                <p className="text-gray-300">No events found.</p>
+              )}
+            </div>
+          </div>
+        )}
       </CardContent>
     </Card>
   );

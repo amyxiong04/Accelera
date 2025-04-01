@@ -2,40 +2,56 @@
 
 import { sql } from '@/lib/db';
 
-import { USER_TABLE_SCHEMA } from '@/db/schema';
-import { EVENT_TABLE_SCHEMA } from '@/db/schema'; 
+import {
+  USER_TABLE_SCHEMA,
+  STARTUP_TABLE_SCHEMA,
+  MANAGED_BY_TABLE_SCHEMA,
+  JOB_POSTING_TABLE_SCHEMA,
+  ACCESSES_TABLE_SCHEMA,
+  RESOURCES_TABLE_SCHEMA,
+  ACCELERATOR_TABLE_SCHEMA,
+  ATTENDS_TABLE_SCHEMA,
+  EVENTS_TABLE_SCHEMA,
+} from '@/db/schema';
+import { DUMMY_DATA } from './dummy-data';
 
 /**
  * Function to create the users table in the database.
  */
-export const createUserTable = async () => {
+export const createSchema = async () => {
   try {
     await sql.unsafe(USER_TABLE_SCHEMA);
-    console.log('User table created successfully');
+    console.log('Users table created successfully');
+
+    await sql.unsafe(ACCELERATOR_TABLE_SCHEMA);
+    console.log('Accelerator table created successfully');
+
+    await sql.unsafe(STARTUP_TABLE_SCHEMA);
+    console.log('Startup table created successfully');
+
+    await sql.unsafe(MANAGED_BY_TABLE_SCHEMA);
+    console.log('ManagedBy table created successfully');
+
+    await sql.unsafe(JOB_POSTING_TABLE_SCHEMA);
+    console.log('JobPosting table created successfully');
+
+    await sql.unsafe(RESOURCES_TABLE_SCHEMA);
+    console.log('Resources table created successfully');
+
+    await sql.unsafe(ACCESSES_TABLE_SCHEMA);
+    console.log('Accesses table created successfully');
+
+    await sql.unsafe(ATTENDS_TABLE_SCHEMA);
+    console.log('Attends table created successfully');
+
+    await sql.unsafe(EVENTS_TABLE_SCHEMA);
+    console.log('Events table created successfully');
+
+    console.log('Complete schema created successfully');
+
+    await sql.unsafe(DUMMY_DATA);
+    console.log('Dummy data inserted successfully');
   } catch (error) {
     console.error('Error creating user table:', error);
   }
 };
-
-export const createEventTable = async () => {
-  try {
-    await sql.unsafe(EVENT_TABLE_SCHEMA);
-    console.log('Event table created successfully');
-  } catch (error) {
-    console.error('Error creating event table:', error);
-  }
-};
-
-export const createSchema = async () => {
-  try {
-    await createUserTable();
-    await createEventTable();
-  } catch (error) {
-    console.error('Error creating schema:', error);
-  } finally {
-    console.log('Schema creation process completed');
-  }
-};
-
-
-

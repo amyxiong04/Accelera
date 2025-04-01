@@ -1,14 +1,25 @@
 'use server';
 
+import { ServerActionResult } from '@/hooks/useServerAction';
 import { sql } from '@/lib/db';
 
-export async function updateUser(formData: FormData) {
+type UpdateUserReturn = {
+  success: boolean;
+  message?: string;
+};
+
+export async function updateUser(
+  formData: FormData,
+): Promise<ServerActionResult<UpdateUserReturn>> {
   try {
     const oldEmail = formData.get('oldEmail')?.toString();
     const newEmail = formData.get('newEmail')?.toString();
 
     if (!oldEmail || !newEmail) {
-      return { error: 'Both old and new emails required.' };
+      return {
+        data: null,
+        error: 'Failed to update email.',
+      };
     }
 
     await sql`
@@ -17,10 +28,14 @@ export async function updateUser(formData: FormData) {
       WHERE email = ${oldEmail};
     `;
 
-    return { success: true, message: 'Email updated successfully.' };
+    return {
+      data: { success: true, message: 'Email updated successfully.' },
+    };
   } catch (err) {
     console.error('Update email error:', err);
-    return { error: 'Failed to update email. Please try again.' };
+    return {
+      data: null,
+      error: 'Failed to update email.',
+    };
   }
 }
-

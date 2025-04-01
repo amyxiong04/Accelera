@@ -3,16 +3,8 @@
 import { UserTableType } from '@/db/schema';
 import { ServerActionResult } from '@/hooks/useServerAction';
 import { sql } from '@/lib/db';
+import { hashPassword } from '@/lib/hash-password';
 import { z } from 'zod';
-import crypto from 'crypto';
-
-// Function to hash passwords
-function hashPassword(password: string): string {
-  // Create a SHA-256 hash with a salt
-  const salt = crypto.randomBytes(16).toString('hex');
-  const hash = crypto.pbkdf2Sync(password, salt, 1000, 64, 'sha256').toString('hex');
-  return `${salt}:${hash}`;
-}
 
 // Define Zod schema for signup validation
 const SignupFormSchema = z.object({

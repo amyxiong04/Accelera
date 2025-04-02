@@ -10,10 +10,10 @@ const ProjectionSchema = z.object({
 
 export type ProjectionFormData = z.infer<typeof ProjectionSchema>;
 
-export type ProjectionResult = Record<string, any>[];
+export type ProjectionResult = Record<string, unknown>[];
 
 export async function projectEvents(
-  formData: FormData
+  formData: FormData,
 ): Promise<ServerActionResult<ProjectionResult>> {
   try {
     const attributes = formData.getAll('attributes').map(String);

@@ -1,0 +1,68 @@
+'use client';
+
+import { getStartupAllEvents } from '@/actions/division/get-startup-all-events';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardHeader } from '@/components/ui/card';
+import { useServerAction } from '@/hooks/useServerAction';
+import { cn } from '@/lib/utils';
+
+export function DivisionForm({ className, ...props }: React.ComponentProps<'form'>) {
+  const {
+    mutateAsync,
+    isPending: isSubmitting,
+    error: actionError,
+    data: results,
+    isError,
+  } = useServerAction(getStartupAllEvents);
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    const form = e.target as HTMLFormElement;
+    const formData = new FormData(form);
+
+    mutateAsync(formData).then((result) => {
+      if (!result.error) {
+        console.log(result.data);
+      }
+    });
+  };
+
+  return (
+    <Card className="w-full">
+      <CardHeader>
+        <h1 className="text-2xl font-bold">Find the most active Startup</h1>
+        <p className="text-muted-foreground text-sm text-balance">Generate below</p>
+      </CardHeader>
+      <CardContent className="w-full">
+        <form className={cn('flex flex-col gap-6', className)} onSubmit={handleSubmit} {...props}>
+          <div className="grid gap-6">
+            <Button type="submit" className="w-full" disabled={isSubmitting}>
+              {isSubmitting ? 'Finding...' : 'Find Active Startups'}
+            </Button>
+            {isError && <p className="text-sm text-red-500">{actionError}</p>}
+          </div>
+        </form>
+        {results && (
+          <div className="mt-6">
+            <h2 className="mb-2 text-lg font-bold">
+              The Startups that are participating in all events:
+            </h2>
+            <div className="max-h-64 overflow-y-auto rounded-md border p-3">
+              {results.length > 0 ? (
+                <ul className="space-y-2">
+                  {results.map((event, idx) => (
+                    <li key={idx} className="rounded-md border p-3">
+                      <strong>{event.name}</strong>
+                    </li>
+                  ))}
+                </ul>
+              ) : (
+                <p className="text-gray-300">No startups found.</p>
+              )}
+            </div>
+          </div>
+        )}
+      </CardContent>
+    </Card>
+  );
+}

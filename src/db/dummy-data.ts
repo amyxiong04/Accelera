@@ -94,6 +94,10 @@ INSERT INTO event (name, location, description, event_type) VALUES
 -- Insert dummy attends relationships (startups attending events)
 INSERT INTO attends (event_id, startup_id, registration_date) VALUES
   (1, 1, '2023-10-01'),
+  (2, 1, '2023-10-01'),
+  (3, 1, '2023-10-01'),
+  (4, 1, '2023-10-01'),
+  (5, 1, '2023-10-01'),
   (1, 2, '2023-09-15'),
   (3, 3, '2023-11-10'),
   (1, 4, '2023-10-20'),

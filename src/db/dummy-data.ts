@@ -11,13 +11,37 @@ INSERT INTO users (email, name, password) VALUES
   ('admin@example.com', 'Admin', '${useHashedPasswords[0]}'),
   ('admin2@example.com', 'Admin 2', '${useHashedPasswords[0]}');
 
--- Insert dummy accelerators
+  -- Insert dummy accelerators
 INSERT INTO accelerator (name, location, cohort_start_date, program_focus) VALUES
   ('TechStars', 'Boulder, CO', '2023-03-01', 'Software Technology'),
   ('Y Combinator', 'Mountain View, CA', '2023-06-15', 'General Technology'),
   ('500 Startups', 'San Francisco, CA', '2023-01-10', 'E-commerce'),
   ('MassChallenge', 'Boston, MA', '2023-09-05', 'Healthcare'),
   ('Founders Factory', 'London, UK', '2023-05-20', 'Fintech');
+
+-- Insert dummy investors
+INSERT INTO investors (user_id, firm, invesment_focus, capital) VALUES
+  (1, 'Sequoia Capital', 'Software', 50000000.00),
+  (2, 'Andreessen Horowitz', 'General Technology', 75000000.00),
+  (3, 'SoftBank', 'E-commerce', 100000000.00),
+  (4, 'Accel', 'Healthcare', 60000000.00),
+  (5, 'Index Ventures', 'Fintech', 80000000.00);
+
+-- Insert dummy investor groups
+INSERT INTO investor_group (invest_group_id, name, email, num_of_investors) VALUES
+  (1, 'TechStars Angels', 'techstars@invest.com', 10),
+  (2, 'Y Combinator Investors', 'yc@invest.com', 15),
+  (3, '500 Startups Network', '500startups@invest.com', 12),
+  (4, 'MassChallenge Fund', 'masschallenge@invest.com', 8),
+  (5, 'Founders Factory Backers', 'foundersfactory@invest.com', 9);
+
+-- Insert dummy belongs_to relationships
+INSERT INTO belongs_to (user_id, invest_group_id) VALUES
+  (1, 1),
+  (2, 1),
+  (3, 5),
+  (4, 2),
+  (5, 5);
 
 -- Insert dummy startups
 INSERT INTO startup (name, description, pitch_deck_url, stage, founded_date) VALUES

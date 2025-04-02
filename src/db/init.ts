@@ -12,6 +12,9 @@ import {
   ACCELERATOR_TABLE_SCHEMA,
   ATTENDS_TABLE_SCHEMA,
   EVENTS_TABLE_SCHEMA,
+  INVESTOR_TABLE_SCHEMA,
+  INVESTOR_GROUP_TABLE_SCHEMA,
+  BELONGS_TO_TABLE_SCHEMA,
 } from '@/db/schema';
 import { DUMMY_DATA } from './dummy-data';
 
@@ -22,6 +25,15 @@ export const createSchema = async () => {
   try {
     await sql.unsafe(USER_TABLE_SCHEMA);
     console.log('Users table created successfully');
+
+    await sql.unsafe(INVESTOR_TABLE_SCHEMA);
+    console.log('Investors table created successfully');
+
+    await sql.unsafe(INVESTOR_GROUP_TABLE_SCHEMA);
+    console.log('InvestorGroup table created successfully');
+
+    await sql.unsafe(BELONGS_TO_TABLE_SCHEMA);
+    console.log('BelongsTo table created successfully');
 
     await sql.unsafe(ACCELERATOR_TABLE_SCHEMA);
     console.log('Accelerator table created successfully');

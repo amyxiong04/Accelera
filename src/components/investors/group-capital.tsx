@@ -1,6 +1,6 @@
 'use client';
 
-import { handleGroup } from '@/actions/group-capital';
+import { handleGroup } from '@/actions/group/group-capital';
 import { Button } from '@/components/ui/button';
 import { useServerAction } from '@/hooks/useServerAction';
 import { cn } from '@/lib/utils';

@@ -1,6 +1,6 @@
 'use client';
 
-import { handleGroupInvestor } from '@/actions/group-investor';
+import { handleGroupInvestor } from '@/actions/group/group-investor';
 import { Button } from '@/components/ui/button';
 import { useServerAction } from '@/hooks/useServerAction';
 import { cn } from '@/lib/utils';

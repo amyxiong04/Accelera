@@ -64,7 +64,7 @@ export function JoinForm({ className, ...props }: React.ComponentProps<'form'>) 
                 name="eventName"
               >
                 <SelectTrigger className="w-[180px]">
-                  <SelectValue placeholder="Theme" />
+                  <SelectValue defaultValue={''} placeholder="Events" />
                 </SelectTrigger>
                 <SelectContent>
                   {events &&

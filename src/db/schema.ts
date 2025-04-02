@@ -20,6 +20,43 @@ export const USER_TABLE_SCHEMA = `
   );
 `;
 
+export const INVESTOR_TABLE_SCHEMA = `
+  DROP TABLE IF EXISTS investors CASCADE;
+
+  CREATE TABLE investors(
+	user_id           INTEGER PRIMARY KEY,
+	firm              VARCHAR(100),
+	invesment_focus   VARCHAR(50),
+	capital           DECIMAL(15, 2),
+	FOREIGN KEY(user_id) REFERENCES users(user_id) ON DELETE CASCADE
+  );
+`;
+
+export const INVESTOR_GROUP_TABLE_SCHEMA = `
+  DROP TABLE IF EXISTS investor_group CASCADE;
+
+  CREATE TABLE investor_group(
+  invest_group_id SERIAL PRIMARY KEY,
+  name VARCHAR(255) NOT NULL UNIQUE,
+  email VARCHAR(255) NOT NULL UNIQUE,
+  num_of_investors INTEGER
+  );
+`;
+
+export const BELONGS_TO_TABLE_SCHEMA = `
+  DROP TABLE IF EXISTS belongs_to CASCADE;
+
+  CREATE TABLE belongs_to(
+  user_id          INTEGER,
+  invest_group_id  INTEGER,
+  PRIMARY KEY(user_id, invest_group_id),
+  FOREIGN KEY(user_id)
+		REFERENCES investors(user_id),
+  FOREIGN KEY(invest_group_id)
+		REFERENCES investor_group(invest_group_id)
+  );
+`;
+
 /**
  * Schema for the statup table.
  * This schema is used to create the startup table in the database.
@@ -155,15 +192,12 @@ export const ATTENDS_TABLE_SCHEMA = `
   );
 `;
 
-
-
-
 export type EventTableType = {
   event_id: number;
   name: string;
   event_type?: string;
   location?: string;
-  date?: string; 
+  date?: string;
 };
 
 export const EVENT_TABLE_SCHEMA = `

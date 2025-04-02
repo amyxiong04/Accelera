@@ -9,7 +9,6 @@ const FilterEventsSchema = z.object({
   location: z.string().optional(),
 });
 
-// Type for parsed form data
 export type FilterEventsFormData = z.infer<typeof FilterEventsSchema>;
 
 export type FilterEventsData = {
@@ -20,7 +19,6 @@ export type FilterEventsData = {
   date: string;
 }[];
 
-// Main server action
 export async function filterEvents(
   formData: FormData,
 ): Promise<ServerActionResult<FilterEventsData>> {
@@ -28,7 +26,6 @@ export async function filterEvents(
     const event_type = formData.get('event_type')?.toString() || '';
     const location = formData.get('location')?.toString() || '';
 
-    // Validate input using Zod
     const result = FilterEventsSchema.safeParse({ event_type, location });
 
     if (!result.success) {
@@ -49,15 +46,13 @@ export async function filterEvents(
       values.push(location);
     }
 
-    let query = 'SELECT * FROM Event';
+    const query = `
+      SELECT event_id, name, event_type, location, date
+      FROM Event
+      ${conditions.length > 0 ? 'WHERE ' + conditions.join(' AND ') : ''}
+      ;
+    `;
 
-    if (conditions.length > 0) {
-      const whereClause = conditions.join(' AND ');
-      query += ` WHERE ${whereClause}`;
-    }
-    
-    query += ';';
-    
     const events: FilterEventsData = await sql.unsafe(query, values);
 
     return { data: events };

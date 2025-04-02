@@ -4,8 +4,6 @@ import './globals.css';
 
 // This should run before the nextjs app is mounted.
 import '../lib/startup';
-
-import { SchemaUpdater } from '@/components/app/schema-updater';
 import { AuthProvider } from '@/context/AuthContext';
 import { TopProgressBar } from '@/components/ui/progress-bar';
 import { Toaster } from 'sonner';
@@ -32,9 +30,9 @@ export default function RootLayout({
       >
         <AuthProvider>
           <TopProgressBar />
-          <main className="h-full w-full">{children}</main>
+
+          {children}
           <Toaster />
-          <SchemaUpdater />
         </AuthProvider>
       </body>
     </html>

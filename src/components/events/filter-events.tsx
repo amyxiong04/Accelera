@@ -32,30 +32,42 @@ export default function FilterEventsForm() {
 
       <form onSubmit={handleSubmit} className="flex flex-col gap-4">
         <div>
-          <label className="block text-sm mb-1">Event Type</label>
+          <label htmlFor="eventType" className="block text-sm mb-1">Event Type</label>
           <select
+            id="eventType"
             value={eventType}
             onChange={(e) => setEventType(e.target.value)}
             className="border border-white p-2 w-full bg-black text-white rounded-md"
           >
-            <option value="">All</option>
+            <option value="">All Types</option>
             <option value="Workshop">Workshop</option>
             <option value="Pitch Day">Pitch Day</option>
             <option value="Networking">Networking</option>
+            <option value="Talk">Talk</option>
+            <option value="Panel">Panel</option>
+            <option value="Showcase">Showcase</option>
+            <option value="Competition">Competition</option>
+            <option value="Conference">Conference</option>
           </select>
         </div>
 
         <div>
-          <label className="block text-sm mb-1">Location</label>
+          <label htmlFor="location" className="block text-sm mb-1">Location</label>
           <select
+            id="location"
             value={location}
             onChange={(e) => setLocation(e.target.value)}
             className="border border-white p-2 w-full bg-black text-white rounded-md"
           >
-            <option value="">All</option>
+            <option value="">All Locations</option>
             <option value="Vancouver">Vancouver</option>
             <option value="Toronto">Toronto</option>
             <option value="Online">Online</option>
+            <option value="San Francisco, CA">San Francisco</option>
+            <option value="Boston, MA">Boston</option>
+            <option value="New York, NY">New York</option>
+            <option value="Seattle, WA">Seattle</option>
+            <option value="Austin, TX">Austin</option>
           </select>
         </div>
 

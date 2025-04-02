@@ -11,7 +11,9 @@ export async function handleLogin(formData: FormData) {
       return { error: 'All fields are required.' };
     }
 
-    await sql`DELETE FROM users WHERE email = ${email.toString()} AND password = ${password.toString()}`;
+    await sql`DELETE 
+    FROM users
+    WHERE email = ${email.toString()} AND password = ${password.toString()}`;
 
     // Return success
     return { success: true };

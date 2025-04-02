@@ -28,7 +28,7 @@ export async function handleJoin(formData: FormData): Promise<ServerActionResult
       data: result,
     };
   } catch (err) {
-    console.error('Update email error:', err);
+    console.error('Fail to join error:', err);
     return {
       data: null,
       error: 'Failed to find event.',

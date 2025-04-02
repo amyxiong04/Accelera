@@ -20,6 +20,9 @@ export const USER_TABLE_SCHEMA = `
   );
 `;
 
+/**
+ * Schema for the investors table.
+ */
 export const INVESTOR_TABLE_SCHEMA = `
   DROP TABLE IF EXISTS investors CASCADE;
 
@@ -32,6 +35,9 @@ export const INVESTOR_TABLE_SCHEMA = `
   );
 `;
 
+/**
+ * Schema for the investor_group table.
+ */
 export const INVESTOR_GROUP_TABLE_SCHEMA = `
   DROP TABLE IF EXISTS investor_group CASCADE;
 
@@ -43,6 +49,10 @@ export const INVESTOR_GROUP_TABLE_SCHEMA = `
   );
 `;
 
+/**
+ * Schema for the belongs_to table.
+ * This table is a junction table between the investor and belongs_to.
+ */
 export const BELONGS_TO_TABLE_SCHEMA = `
   DROP TABLE IF EXISTS belongs_to CASCADE;
 
@@ -207,5 +217,27 @@ export const EVENT_TABLE_SCHEMA = `
     event_type VARCHAR(100),
     location VARCHAR(100),
     date DATE NOT NULL
+  );
+`;
+
+export const FUNDING_ROUND_TABLE_SCHEMA = `
+  DROP TABLE IF EXISTS funding_round CASCADE;
+
+  CREATE TABLE IF NOT EXISTS funding_round(
+    round_no       INTEGER NOT NULL,
+    amount_raised  INTEGER NOT NULL,
+    round_label    VARCHAR(100) NOT NULL,
+    date_closed    DATE NOT NULL,
+    user_id        INTEGER,
+    startup_id	   INTEGER,
+    PRIMARY KEY(round_no, user_id, startup_id),
+    FOREIGN KEY(user_id)
+        REFERENCES investors(user_id)
+        ON DELETE CASCADE
+        ON UPDATE CASCADE,
+    FOREIGN KEY(startup_id)
+        REFERENCES startup(startup_id)
+        ON DELETE CASCADE
+        ON UPDATE CASCADE
   );
 `;

@@ -95,7 +95,7 @@ export function JoinForm({ className, ...props }: React.ComponentProps<'form'>) 
                   ))}
                 </ul>
               ) : (
-                <p className="text-gray-300">No events found.</p>
+                <p className="text-gray-300">No startups found.</p>
               )}
             </div>
           </div>

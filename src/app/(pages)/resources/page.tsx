@@ -102,7 +102,7 @@ export default function ResourcesPage() {
 
           {/* Top Performing Startups Card */}
           {!topStartupsLoading && !topStartupsError && topStartups && topStartups.length > 0 && (
-            <Card className="bg-primary/5 border-primary/20">
+            <Card className="">
               <CardHeader>
                 <div className="flex items-center gap-2">
                   <Award className="text-primary h-5 w-5" />
@@ -159,6 +159,7 @@ export default function ResourcesPage() {
                             <CardTitle className="text-xl">{resource.name}</CardTitle>
                             {isLoggedIn && (
                               <Button
+                                title="Delete Resource"
                                 variant="ghost"
                                 size="icon"
                                 className="text-destructive hover:bg-destructive/10 h-8 w-8"

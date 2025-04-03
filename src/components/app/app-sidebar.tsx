@@ -1,7 +1,7 @@
 'use client';
 
 import * as React from 'react';
-import { Building, Calendar, FileStack, GalleryVerticalEnd, HandCoins } from 'lucide-react';
+import { Building, Calendar, FileStack, GalleryVerticalEnd, HandCoins, User } from 'lucide-react';
 
 import { NavMain } from '@/components/app/nav-main';
 import { NavUser } from '@/components/app/nav-user';
@@ -45,6 +45,11 @@ const data = {
       title: 'Resources',
       url: '/resources',
       icon: FileStack,
+    },
+    {
+      title: 'Account',
+      url: '/account',
+      icon: User,
     },
   ],
 };

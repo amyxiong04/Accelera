@@ -18,6 +18,7 @@ import { format } from 'date-fns';
 import { useAuth } from '@/context/AuthContext';
 import { CreateStartupDialog } from '../startup/create-startup-dialog';
 import { ResourceAccessDialog } from './resource-access-dialog';
+import { EventParticipationDialog } from './event-participation-dialog';
 
 export const UserStartups = () => {
   const { user } = useAuth();
@@ -75,7 +76,7 @@ export const UserStartups = () => {
   }
 
   return (
-    <div className="flex h-full w-full flex-col space-y-6 overflow-hidden p-4">
+    <div className="flex h-full w-full flex-col space-y-6 overflow-hidden">
       <div className="flex items-center justify-between">
         <h2 className="text-2xl font-bold">Your Startups</h2>
         <CreateStartupDialog />
@@ -114,6 +115,10 @@ export const UserStartups = () => {
               </div>
               <div className="flex w-full justify-end">
                 <ResourceAccessDialog startupId={startup.startup_id} startupName={startup.name} />
+                <EventParticipationDialog
+                  startupId={startup.startup_id}
+                  startupName={startup.name}
+                />
               </div>
             </CardFooter>
           </Card>

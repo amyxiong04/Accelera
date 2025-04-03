@@ -50,11 +50,11 @@ export function ManageUsersForm() {
   };
 
   return (
-    <div className="max-w-md mx-auto mt-12 text-black">
-      <h1 className="text-center text-2xl font-bold mb-6">Manage Users</h1>
+    <div className="mx-auto mt-12 max-w-md text-black">
+      <h1 className="mb-6 text-center text-2xl font-bold">Manage Users</h1>
 
-      {error && <p className="text-red-500 text-center mb-4">{error}</p>}
-      {successMessage && <p className="text-green-500 text-center mb-4">{successMessage}</p>}
+      {error && <p className="mb-4 text-center text-red-500">{error}</p>}
+      {successMessage && <p className="mb-4 text-center text-green-500">{successMessage}</p>}
 
       <div className="mb-4">
         <label className="block text-sm font-medium">Old Email:</label>
@@ -65,7 +65,7 @@ export function ManageUsersForm() {
           value={oldEmail}
           onChange={(e) => setOldEmail(e.target.value)}
           required
-          className="w-full border border-black rounded-none p-2 mt-1"
+          className="mt-1 w-full rounded-none border border-black p-2"
         />
       </div>
 
@@ -78,20 +78,20 @@ export function ManageUsersForm() {
           value={newEmail}
           onChange={(e) => setNewEmail(e.target.value)}
           required
-          className="w-full border border-black rounded-none p-2 mt-1"
+          className="mt-1 w-full rounded-none border border-black p-2"
         />
-        <Button 
+        <Button
           type="submit"
-          className="w-full border border-black rounded-none p-2 mt-3 bg-white text-black hover:bg-gray-100"
+          className="mt-3 w-full rounded-none border border-black bg-white p-2 text-black hover:bg-gray-100"
         >
           Update Email
         </Button>
       </form>
 
       <form onSubmit={handleDeleteUser}>
-        <Button 
+        <Button
           type="submit"
-          className="w-full border border-black rounded-none p-2 bg-white text-black hover:bg-gray-100"
+          className="w-full rounded-none border border-black bg-white p-2 text-black hover:bg-gray-100"
         >
           Delete User
         </Button>
@@ -99,5 +99,3 @@ export function ManageUsersForm() {
     </div>
   );
 }
-
-

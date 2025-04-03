@@ -27,6 +27,7 @@ export const SchemaUpdater = () => {
   React.useEffect(() => {
     if (data && !isPending) {
       toast.success('Schema recreated successfully!');
+      window.location.reload();
     }
   }, [data, isPending]);
 
@@ -39,7 +40,9 @@ export const SchemaUpdater = () => {
   return (
     <AlertDialog open={isOpen} onOpenChange={setIsOpen}>
       <AlertDialogTrigger asChild>
-        <Button className="absolute top-2 right-2">Recreate Schema</Button>
+        <Button className="absolute top-2 right-2">
+          {isPending ? 'Updating...' : 'Recreate Schema'}
+        </Button>
       </AlertDialogTrigger>
       <AlertDialogContent>
         <AlertDialogHeader>

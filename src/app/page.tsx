@@ -1,12 +1,9 @@
 import { AppSidebar } from '@/components/app/app-sidebar';
-import {
-  Breadcrumb,
-  BreadcrumbItem,
-  BreadcrumbLink,
-  BreadcrumbList,
-  BreadcrumbPage,
-  BreadcrumbSeparator,
-} from '@/components/ui/breadcrumb';
+import DashboardMetrics from '@/components/dashboard/dashboard-metrics';
+import { UserStartups } from '@/components/dashboard/user-startups';
+import { MostActiveStartups } from '@/components/dashboard/most-active-startups';
+
+import { Card, CardContent } from '@/components/ui/card';
 import { Separator } from '@/components/ui/separator';
 import { SidebarInset, SidebarProvider, SidebarTrigger } from '@/components/ui/sidebar';
 
@@ -19,26 +16,22 @@ export default function Page() {
           <div className="flex items-center gap-2 px-4">
             <SidebarTrigger className="-ml-1" />
             <Separator orientation="vertical" className="mr-2 h-4" />
-            <Breadcrumb>
-              <BreadcrumbList>
-                <BreadcrumbItem className="hidden md:block">
-                  <BreadcrumbLink href="#">Building Your Application</BreadcrumbLink>
-                </BreadcrumbItem>
-                <BreadcrumbSeparator className="hidden md:block" />
-                <BreadcrumbItem>
-                  <BreadcrumbPage>Data Fetching</BreadcrumbPage>
-                </BreadcrumbItem>
-              </BreadcrumbList>
-            </Breadcrumb>
           </div>
         </header>
         <div className="flex flex-1 flex-col gap-4 p-4 pt-0">
-          <div className="grid auto-rows-min gap-4 md:grid-cols-3">
-            <div className="bg-muted/50 aspect-video rounded-xl" />
-            <div className="bg-muted/50 aspect-video rounded-xl" />
-            <div className="bg-muted/50 aspect-video rounded-xl" />
+          <DashboardMetrics />
+          <div className="flex h-full w-full items-center justify-center gap-4">
+            <Card className="h-full w-2/3">
+              <CardContent className="h-full w-full">
+                <UserStartups />
+              </CardContent>
+            </Card>
+            <Card className="h-full w-1/3">
+              <CardContent className="h-full w-full">
+                <MostActiveStartups />
+              </CardContent>
+            </Card>
           </div>
-          <div className="bg-muted/50 min-h-[100vh] flex-1 rounded-xl md:min-h-min" />
         </div>
       </SidebarInset>
     </SidebarProvider>

@@ -23,6 +23,7 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { EventParticipationForm } from '@/components/event-participation/event-participation-form';
 import { ScrollArea } from '@/components/ui/scroll-area';
+import { CreateEventDialog } from '@/components/events/create-event-dialog';
 
 export default function EventsPage() {
   const availableFields = [
@@ -128,7 +129,9 @@ export default function EventsPage() {
   return (
     <div className="container mx-auto h-full w-full">
       <ScrollArea className="h-[90vh] w-full px-6">
-        <h1 className="mb-6 text-2xl font-bold">Events</h1>
+        <div className="mb-6 flex items-center justify-between">
+          <h1 className="text-2xl font-bold">Events</h1>
+        </div>
 
         <div className="mb-6 grid grid-cols-1 gap-6 md:grid-cols-2">
           <Card>
@@ -190,14 +193,19 @@ export default function EventsPage() {
         {displayData && (
           <Card>
             <CardHeader>
-              <CardTitle>Event Data</CardTitle>
-              <CardDescription>
-                {isFiltering
-                  ? `Filtered results - ${displayData.length} events`
-                  : `Showing ${displayData.length} events with ${selectedFields.length} columns`}
-                {isFiltering && eventType && ` - Type: ${eventType}`}
-                {isFiltering && location && ` - Location: ${location}`}
-              </CardDescription>
+              <div className="flex w-full items-center justify-between">
+                <div className="w-1/2">
+                  <CardTitle>Event Data</CardTitle>
+                  <CardDescription>
+                    {isFiltering
+                      ? `Filtered results - ${displayData.length} events`
+                      : `Showing ${displayData.length} events with ${selectedFields.length} columns`}
+                    {isFiltering && eventType && ` - Type: ${eventType}`}
+                    {isFiltering && location && ` - Location: ${location}`}
+                  </CardDescription>
+                </div>
+                <CreateEventDialog />
+              </div>
             </CardHeader>
             <CardContent>
               <div>

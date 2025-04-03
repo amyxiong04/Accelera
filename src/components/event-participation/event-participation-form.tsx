@@ -17,7 +17,7 @@ import { useState } from 'react';
 import useSWR from 'swr';
 import { Card, CardContent, CardHeader } from '../ui/card';
 
-export function JoinForm({ className, ...props }: React.ComponentProps<'form'>) {
+export function EventParticipationForm({ className, ...props }: React.ComponentProps<'form'>) {
   const [eventName, setEventName] = useState('');
   const {
     mutateAsync,
@@ -63,8 +63,8 @@ export function JoinForm({ className, ...props }: React.ComponentProps<'form'>) 
                 onValueChange={(e) => setEventName(e)}
                 name="eventName"
               >
-                <SelectTrigger className="w-[180px]">
-                  <SelectValue defaultValue={''} placeholder="Events" />
+                <SelectTrigger className="w-full">
+                  <SelectValue defaultValue={''} placeholder="Select Event..." />
                 </SelectTrigger>
                 <SelectContent>
                   {events &&

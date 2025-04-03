@@ -27,6 +27,7 @@ export const SchemaUpdater = () => {
   React.useEffect(() => {
     if (data && !isPending) {
       toast.success('Schema recreated successfully!');
+      window.location.reload();
     }
   }, [data, isPending]);
 

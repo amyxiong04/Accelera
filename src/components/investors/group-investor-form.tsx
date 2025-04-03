@@ -42,7 +42,12 @@ export function GroupInvestorForm({ className, ...props }: React.ComponentProps<
               <Label htmlFor="minimum" className="mb-1 block text-sm">
                 Minimum Number of Startup
               </Label>
-              <Input id="minimum" name="minimum" type="number" placeholder="Put a number" />
+              <Input
+                id="minimum"
+                name="minimum"
+                type="number"
+                placeholder="Put a number (e.g. 2)"
+              />
             </div>
             <Button type="submit" className="w-full" disabled={isSubmitting}>
               {isSubmitting ? 'Generating...' : 'Generate'}

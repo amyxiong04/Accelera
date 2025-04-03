@@ -1,7 +1,10 @@
 'use client';
 
 import { useServerAction } from '@/hooks/useServerAction';
-import { getStartupsWithMoreAccesses, ResourceAccessResult } from '@/actions/nested-aggregation/nested-aggregation';
+import {
+  getStartupsWithMoreAccesses,
+  ResourceAccessResult,
+} from '@/actions/resources/nested-aggregation';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader } from '@/components/ui/card';
 
@@ -18,7 +21,7 @@ export default function ResourceAccessQuery() {
   };
 
   return (
-    <Card className="w-full max-w-md text-white bg-primary/10">
+    <Card className="bg-primary/10 w-full max-w-md text-white">
       <CardHeader>
         <h1 className="text-2xl font-bold">Top Accessed Startups</h1>
         <p className="text-muted-foreground text-sm">
@@ -26,16 +29,16 @@ export default function ResourceAccessQuery() {
         </p>
       </CardHeader>
       <CardContent>
-        <Button onClick={handleClick} className="w-full mb-4">
+        <Button onClick={handleClick} className="mb-4 w-full">
           Run Query
         </Button>
 
         {isError && <p className="text-red-500">{error}</p>}
 
         {startups && startups.length > 0 && (
-          <ul className="space-y-3 max-h-64 overflow-y-auto">
+          <ul className="max-h-64 space-y-3 overflow-y-auto">
             {startups.map((s) => (
-              <li key={s.startup_id} className="border p-4 rounded text-white">
+              <li key={s.startup_id} className="rounded border p-4 text-white">
                 <p className="font-semibold">{s.name}</p>
                 <p>Resource Accesses: {s.access_count}</p>
               </li>
@@ -50,5 +53,3 @@ export default function ResourceAccessQuery() {
     </Card>
   );
 }
-
-

@@ -50,7 +50,7 @@ export function GroupCapitalForm({ className, ...props }: React.ComponentProps<'
                 <ul className="space-y-2">
                   {results.map((group, idx) => (
                     <li key={idx} className="rounded-md border p-3">
-                      <strong>{group.name}</strong> | ${Number(group.avg).toFixed(2)}
+                      <strong>{group.name}</strong> | ${Number(group.avg).toLocaleString()}
                     </li>
                   ))}
                 </ul>

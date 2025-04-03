@@ -149,7 +149,7 @@ export const ACCESSES_TABLE_SCHEMA = `
     access_date INTEGER,
     download_date VARCHAR(10),
     PRIMARY KEY (resource_id, startup_id),
-    FOREIGN KEY (resource_id) REFERENCES resource(resource_id),
+    FOREIGN KEY (resource_id) REFERENCES resource(resource_id) ON DELETE CASCADE,
     FOREIGN KEY (startup_id) REFERENCES startup(startup_id)
   );
 `;

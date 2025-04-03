@@ -246,7 +246,10 @@ INSERT INTO startup (name, description, pitch_deck_url, stage, founded_date) VAL
   ('App Two', 'Simple mobile app', 'https://example.com/app-two-deck', 'Series A', '2022-06-15'),
   ('Toolset', 'Utility tool for small teams', 'https://example.com/toolset-deck', 'Pre-seed', '2023-04-20'),
   ('Beta Four', 'Consumer testing app', 'https://example.com/beta-four-deck', 'Idea', '2023-07-07'),
-  ('Whatever Inc', 'General tech startup', 'https://example.com/whatever-deck', 'Series B', '2021-12-01');
+  ('Whatever Inc', 'General tech startup', 'https://example.com/whatever-deck', 'Series B', '2021-12-01'),
+  ('GlobalStart', 'Scalable global SaaS solutions', 'https://example.com/globalstart-deck', 'Series A', '2022-01-01'),
+  ('EduNext', 'Next-gen education tools', 'https://example.com/edunext-deck', 'Seed', '2023-03-15'),
+  ('HealthBridge', 'Bridging healthcare and AI', 'https://example.com/healthbridge-deck', 'Pre-seed', '2023-05-10');
 
 -- Insert dummy managed_by relationships
 INSERT INTO managed_by (user_id, startup_id, role, start_date) VALUES
@@ -324,5 +327,35 @@ INSERT INTO attends (event_id, startup_id, registration_date) VALUES
   (7, 7, '2024-01-02'),
   (8, 8, '2024-01-03'),
   (9, 9, '2024-01-04'),
-  (10, 10, '2024-01-05');
+  (10, 10, '2024-01-05'),
+  (1, 11, '2023-09-01'),
+  (2, 11, '2023-09-02'),
+  (3, 11, '2023-09-03'),
+  (4, 11, '2023-09-04'),
+  (5, 11, '2023-09-05'),
+  (6, 11, '2023-09-06'),
+  (7, 11, '2023-09-07'),
+  (8, 11, '2023-09-08'),
+  (9, 11, '2023-09-09'),
+  (10, 11, '2023-09-10'),
+  (1, 12, '2023-09-11'),
+  (2, 12, '2023-09-12'),
+  (3, 12, '2023-09-13'),
+  (4, 12, '2023-09-14'),
+  (5, 12, '2023-09-15'),
+  (6, 12, '2023-09-16'),
+  (7, 12, '2023-09-17'),
+  (8, 12, '2023-09-18'),
+  (9, 12, '2023-09-19'),
+  (10, 12, '2023-09-20'),
+  (1, 13, '2023-09-21'),
+  (2, 13, '2023-09-22'),
+  (3, 13, '2023-09-23'),
+  (4, 13, '2023-09-24'),
+  (5, 13, '2023-09-25'),
+  (6, 13, '2023-09-26'),
+  (7, 13, '2023-09-27'),
+  (8, 13, '2023-09-28'),
+  (9, 13, '2023-09-29'),
+  (10, 13, '2023-09-30');
   

@@ -1,5 +1,6 @@
 import { AppSidebar } from '@/components/app/app-sidebar';
 import DashboardMetrics from '@/components/dashboard/dashboard-metrics';
+import { UserStartups } from '@/components/dashboard/user-startups';
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -35,7 +36,9 @@ export default function Page() {
         </header>
         <div className="flex flex-1 flex-col gap-4 p-4 pt-0">
           <DashboardMetrics />
-          <div className="bg-muted/50 h-full min-h-[100vh] flex-1 rounded-xl md:min-h-min" />
+          <div className="bg-muted/50 flex flex-1 items-center justify-center rounded-xl p-4">
+            <UserStartups />
+          </div>
         </div>
       </SidebarInset>
     </SidebarProvider>

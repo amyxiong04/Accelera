@@ -1,24 +1,36 @@
 'use server';
 
+import { ServerActionResult } from '@/hooks/useServerAction';
 import { sql } from '@/lib/db';
 
-export async function handleLogin(formData: FormData) {
-  try {
-    const email = formData.get('email');
-    const password = formData.get('password');
+type DeleteUserReturn = {
+  success: boolean;
+  message?: string;
+};
 
-    if (!email || !password) {
-      return { error: 'All fields are required.' };
+export async function deleteUserAction(
+  formData: FormData,
+): Promise<ServerActionResult<DeleteUserReturn>> {
+  try {
+    const email = formData.get('email')?.toString();
+
+    if (!email) {
+      return {
+        data: null,
+        error: 'Failed to delete user.',
+      };
     }
 
-    await sql`DELETE 
-    FROM users
-    WHERE email = ${email.toString()} AND password = ${password.toString()}`;
+    await sql`DELETE FROM users WHERE email = ${email}`;
 
-    // Return success
-    return { success: true };
+    return {
+      data: { success: true, message: 'User deleted successfully!' },
+    };
   } catch (err) {
-    console.error('Login error:', err);
-    return { error: 'Failed to Login. Please try again.' };
+    console.error('Delete user error:', err);
+    return {
+      data: null,
+      error: 'Failed to delete user. Please try again.',
+    };
   }
 }

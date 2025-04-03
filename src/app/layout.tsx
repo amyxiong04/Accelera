@@ -4,12 +4,9 @@ import './globals.css';
 
 // This should run before the nextjs app is mounted.
 import '../lib/startup';
-import { SchemaUpdater } from '@/components/app/schema-updater';
 import { AuthProvider } from '@/context/AuthContext';
 import { TopProgressBar } from '@/components/ui/progress-bar';
 import { Toaster } from 'sonner';
-
-// Schema
 
 const figtreeFont = Figtree({
   variable: '--font-figtree',
@@ -17,7 +14,7 @@ const figtreeFont = Figtree({
 });
 
 export const metadata: Metadata = {
-  title: 'Accelera',
+  title: 'Accelera - Auth',
   description: 'Startup Accelerator',
 };
 
@@ -29,13 +26,13 @@ export default function RootLayout({
   return (
     <html lang="en" className="dark">
       <body
-        className={`${figtreeFont.variable} ${figtreeFont.className} relative h-screen w-screen`}
+        className={`${figtreeFont.variable} ${figtreeFont.className} relative h-screen w-screen overflow-hidden`}
       >
         <AuthProvider>
           <TopProgressBar />
-          <main>{children}</main>
+
+          {children}
           <Toaster />
-          <SchemaUpdater />
         </AuthProvider>
       </body>
     </html>

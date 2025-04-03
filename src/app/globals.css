@@ -122,3 +122,12 @@
     @apply bg-background text-foreground;
   }
 }
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* For Firefox */
+* {
+  scrollbar-color: auto transparent;
+}

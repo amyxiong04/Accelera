@@ -8,6 +8,7 @@ type AuthState = {
   user: LoginData['user'] | null;
   isAuthenticated: boolean;
   isLoading: boolean;
+  setAuthState: React.Dispatch<React.SetStateAction<AuthState>>;
 };
 
 // Define the shape of our context
@@ -25,6 +26,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     user: null,
     isAuthenticated: false,
     isLoading: true,
+    setAuthState: () => {},
   });
 
   // Check for existing session on initial load
@@ -38,6 +40,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
             user: userData,
             isAuthenticated: true,
             isLoading: false,
+            setAuthState: setAuthState,
           });
         } else {
           setAuthState((prev) => ({ ...prev, isLoading: false }));
@@ -63,6 +66,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       user: userData.user,
       isAuthenticated: true,
       isLoading: false,
+      setAuthState: setAuthState,
     });
   };
 
@@ -78,6 +82,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       user: null,
       isAuthenticated: false,
       isLoading: false,
+      setAuthState: setAuthState,
     });
 
     window.location.href = '/auth/login';
@@ -88,6 +93,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     <AuthContext.Provider
       value={{
         ...authState,
+        setAuthState,
         login,
         logout,
       }}

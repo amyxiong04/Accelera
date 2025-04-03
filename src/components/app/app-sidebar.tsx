@@ -1,19 +1,19 @@
 'use client';
 
 import * as React from 'react';
-import { Bot, Building, Frame, GalleryVerticalEnd, Map, PieChart, Settings2 } from 'lucide-react';
+import { Building, Calendar, GalleryVerticalEnd } from 'lucide-react';
 
 import { NavMain } from '@/components/app/nav-main';
-import { NavResources } from '@/components/app/nav-resources';
 import { NavUser } from '@/components/app/nav-user';
-import { TeamSwitcher } from '@/components/app/team-switcher';
 import {
   Sidebar,
   SidebarContent,
   SidebarFooter,
   SidebarHeader,
+  SidebarMenuButton,
   SidebarRail,
 } from '@/components/ui/sidebar';
+import Link from 'next/link';
 
 // This is sample data.
 const data = {
@@ -27,55 +27,14 @@ const data = {
   navMain: [
     {
       title: 'Startups',
-      url: '#',
+      url: '/',
       icon: Building,
       isActive: true,
     },
     {
-      title: 'Investors',
-      url: '#',
-      icon: Bot,
-    },
-    {
-      title: 'Settings',
-      url: '#',
-      disabled: true,
-      icon: Settings2,
-      items: [
-        {
-          title: 'General',
-          url: '#',
-        },
-        {
-          title: 'Team',
-          url: '#',
-        },
-        {
-          title: 'Billing',
-          url: '#',
-        },
-        {
-          title: 'Limits',
-          url: '#',
-        },
-      ],
-    },
-  ],
-  resources: [
-    {
-      name: 'Resource 1',
-      url: '#',
-      icon: Frame,
-    },
-    {
-      name: 'Resource 2',
-      url: '#',
-      icon: PieChart,
-    },
-    {
-      name: 'Resource 3',
-      url: '#',
-      icon: Map,
+      title: 'Events',
+      url: '/events',
+      icon: Calendar,
     },
   ],
 };
@@ -84,11 +43,23 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   return (
     <Sidebar collapsible="icon" {...props}>
       <SidebarHeader>
-        <TeamSwitcher teams={data.teams} />
+        <SidebarMenuButton
+          asChild
+          size="lg"
+          className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
+        >
+          <Link href="/">
+            <div className="bg-sidebar-primary text-sidebar-primary-foreground flex aspect-square size-8 items-center justify-center rounded-lg">
+              <GalleryVerticalEnd className="h-4 w-4" />
+            </div>
+            <div className="grid flex-1 text-left text-sm leading-tight">
+              <span className="truncate font-semibold">Accelera</span>
+            </div>
+          </Link>
+        </SidebarMenuButton>
       </SidebarHeader>
       <SidebarContent>
         <NavMain items={data.navMain} />
-        <NavResources projects={data.resources} />
       </SidebarContent>
       <SidebarFooter>
         <NavUser />

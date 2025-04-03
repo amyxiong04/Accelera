@@ -3,6 +3,9 @@
 import React, { useState, useEffect } from 'react';
 import { Calendar, FileText, Briefcase } from 'lucide-react';
 import { MetricCard } from './metric';
+import { countUserItems } from '@/actions/users/count-user-items';
+import { useServerAction } from '@/hooks/useServerAction';
+import { useAuthentication } from '@/hooks/useAuthentication';
 
 // TypeScript interfaces
 interface MetricData {
@@ -23,24 +26,29 @@ const DashboardMetrics: React.FC = () => {
     startups: { count: 0, trend: 0 },
   });
 
+  const { user, isAuthenticated } = useAuthentication();
+  const { mutateAsync, data } = useServerAction(countUserItems);
+
   useEffect(() => {
-    // In a real application, you would fetch this data from your API
-    // This is simulated data for demonstration
-    const fetchData = async (): Promise<void> => {
-      try {
-        // Simulating API response
-        setMetrics({
-          events: { count: 5, trend: 8.2 },
-          resources: { count: 5, trend: 12.5 },
-          startups: { count: 5, trend: -3.1 },
-        });
-      } catch (error) {
-        console.error('Error fetching metrics:', error);
+    const fetchUserCounts = async () => {
+      if (isAuthenticated && user?.id) {
+        await mutateAsync(user.id.toString());
       }
     };
 
-    fetchData();
-  }, []);
+    fetchUserCounts();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isAuthenticated, user]);
+
+  useEffect(() => {
+    if (data) {
+      setMetrics({
+        events: { count: data.events, trend: 0 },
+        resources: { count: data.resources, trend: 0 },
+        startups: { count: data.startups, trend: 0 },
+      });
+    }
+  }, [data]);
 
   return (
     <div className="grid grid-cols-1 gap-4 md:grid-cols-3">

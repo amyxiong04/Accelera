@@ -5,7 +5,7 @@ import type { NextRequest } from 'next/server';
 const publicPaths = ['/auth/login', '/auth/signup'];
 
 export function middleware(request: NextRequest) {
- // return NextResponse.next(); // disables the guard temporarily
+  // return NextResponse.next(); // disables the guard temporarily
   // Get the path from the request URL
   const path = request.nextUrl.pathname;
 

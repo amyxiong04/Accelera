@@ -1,9 +1,10 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { Suspense, useEffect, useState } from 'react';
 import { usePathname, useSearchParams } from 'next/navigation';
 
-export function TopProgressBar() {
+// Inner component that uses useSearchParams
+function ProgressBarInner() {
   const [progress, setProgress] = useState(0);
   const [isVisible, setIsVisible] = useState(false);
   const pathname = usePathname();
@@ -56,5 +57,19 @@ export function TopProgressBar() {
         transition: 'width 0.3s ease-in-out',
       }}
     />
+  );
+}
+
+// Fallback component shown during loading
+function ProgressBarFallback() {
+  return <div className="bg-primary/30 fixed top-0 right-0 left-0 z-50 h-1" />;
+}
+
+// Main exported component with Suspense boundary
+export function TopProgressBar() {
+  return (
+    <Suspense fallback={<ProgressBarFallback />}>
+      <ProgressBarInner />
+    </Suspense>
   );
 }

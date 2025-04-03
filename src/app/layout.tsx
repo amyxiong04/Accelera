@@ -26,7 +26,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="dark">
       <body
-        className={`${figtreeFont.variable} ${figtreeFont.className} relative h-screen w-screen`}
+        className={`${figtreeFont.variable} ${figtreeFont.className} relative h-screen w-screen overflow-hidden`}
       >
         <AuthProvider>
           <TopProgressBar />

@@ -10,7 +10,8 @@ const ProjectionSchema = z.object({
 
 export type ProjectionFormData = z.infer<typeof ProjectionSchema>;
 
-export type ProjectionResult = Record<string, unknown>[];
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export type ProjectionResult = Record<string, any>[];
 
 export async function projectEvents(
   formData: FormData,
@@ -18,6 +19,7 @@ export async function projectEvents(
   try {
     const attributes = formData.getAll('attributes').map(String);
 
+    console.log(attributes);
     const parsed = ProjectionSchema.safeParse({ attributes });
 
     if (!parsed.success) {

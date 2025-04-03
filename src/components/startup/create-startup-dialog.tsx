@@ -78,7 +78,7 @@ export function CreateStartupDialog() {
         description: result.error,
       });
     } else {
-      toast.success('Startup Created', {
+      toast.success('Startup created, please refresh the page!', {
         description: `${result.data?.startup.name} has been successfully created.`,
       });
       setOpen(false);

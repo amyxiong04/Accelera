@@ -80,7 +80,7 @@ export const UserStartups = () => {
         <CreateStartupDialog />
       </div>
 
-      <div className="grid max-h-[calc(100%-12rem)] flex-1 grid-cols-1 gap-4 overflow-y-auto">
+      <div className="grid max-h-[calc(100%-4rem)] flex-1 grid-cols-1 gap-4 overflow-y-auto md:grid-cols-2">
         {data.startups.map((startup) => (
           <Card key={startup.startup_id} className="flex h-full flex-col">
             <CardHeader>

@@ -75,7 +75,7 @@ export const UserStartups = () => {
   }
 
   return (
-    <div className="flex h-full w-full flex-col space-y-6 overflow-hidden p-4">
+    <div className="flex h-full w-full flex-col space-y-6 overflow-hidden">
       <div className="flex items-center justify-between">
         <h2 className="text-2xl font-bold">Your Startups</h2>
         <CreateStartupDialog />

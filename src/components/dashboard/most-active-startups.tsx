@@ -29,7 +29,7 @@ export function MostActiveStartups({ className, ...props }: React.ComponentProps
   return (
     <div className="w-full">
       <div>
-        <h1 className="text-2xl font-bold">Find the most active Startup</h1>
+        <h1 className="text-2xl font-bold">Find the Most Active Startup</h1>
         <p className="text-muted-foreground text-sm text-balance">Generate below</p>
       </div>
       <div className="mt-4 w-full">

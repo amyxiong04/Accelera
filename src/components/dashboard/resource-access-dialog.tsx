@@ -38,6 +38,7 @@ export function ResourceAccessDialog({ startupId, startupName }: ResourceAccessD
     data: resourcesData,
     error: resourcesError,
     isPending: resourcesLoading,
+    mutateAsync,
   } = useServerAction(getResources);
 
   console.log(resourcesData);
@@ -49,8 +50,9 @@ export function ResourceAccessDialog({ startupId, startupName }: ResourceAccessD
   // Load resources when dialog opens
   React.useEffect(() => {
     if (open) {
-      getResources();
+      mutateAsync(undefined);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [open]);
 
   const handleAccessResource = async () => {
@@ -64,7 +66,8 @@ export function ResourceAccessDialog({ startupId, startupName }: ResourceAccessD
     const formData = new FormData();
     formData.append('resource_id', selectedResourceId);
     formData.append('startup_id', startupId.toString());
-    formData.append('access_date', Date.now().toString());
+    formData.append('access_date', Math.round(Date.now() / 1000).toString());
+    formData.append('download_date', new Date().toLocaleDateString());
 
     const result = await accessResource(formData);
 
@@ -104,7 +107,7 @@ export function ResourceAccessDialog({ startupId, startupName }: ResourceAccessD
         ) : (
           <div className="py-4">
             <Select onValueChange={setSelectedResourceId} value={selectedResourceId}>
-              <SelectTrigger>
+              <SelectTrigger className="w-full">
                 <SelectValue placeholder="Select a resource" />
               </SelectTrigger>
               <SelectContent>

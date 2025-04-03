@@ -10,6 +10,7 @@ import {
   SidebarMenuItem,
 } from '@/components/ui/sidebar';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 
 export function NavMain({
   items,
@@ -26,6 +27,8 @@ export function NavMain({
     }[];
   }[];
 }) {
+  const location = usePathname();
+
   return (
     <SidebarGroup>
       <SidebarGroupLabel>Platform</SidebarGroupLabel>
@@ -33,7 +36,11 @@ export function NavMain({
         {items.map((item) => (
           <SidebarMenuItem key={item.title} className="cursor-pointer">
             <Link href={item.url} className="w-full cursor-pointer">
-              <SidebarMenuButton tooltip={item.title} className="cursor-pointer">
+              <SidebarMenuButton
+                tooltip={item.title}
+                className="h-9 cursor-pointer"
+                isActive={location === item.url}
+              >
                 {item.icon && <item.icon />}
                 <span>{item.title}</span>
                 {item.items && (

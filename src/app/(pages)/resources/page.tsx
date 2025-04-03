@@ -4,11 +4,14 @@
 import { useAuthentication } from '@/hooks/useAuthentication';
 import { useServerAction } from '@/hooks/useServerAction';
 import { getResources } from '@/actions/resources/get-resources-action';
+import {
+  getStartupsWithMoreAccesses,
+  ResourceAccessResult,
+} from '@/actions/resources/nested-aggregation';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import { ExternalLink } from 'lucide-react';
-import { ScrollArea } from '@/components/ui/scroll-area';
+import { ExternalLink, TrendingUp, Award } from 'lucide-react';
 import { Skeleton } from '@/components/ui/skeleton';
 import Link from 'next/link';
 import { useEffect } from 'react';
@@ -25,13 +28,22 @@ export default function ResourcesPage() {
     mutateAsync: getResourcesAction,
   } = useServerAction(getResources);
 
+  // Get startups with above average resource accesses
+  const {
+    data: topStartups,
+    isPending: topStartupsLoading,
+    isError: topStartupsError,
+    mutateAsync: getTopStartupsAction,
+  } = useServerAction<ResourceAccessResult[], void>(getStartupsWithMoreAccesses);
+
   useEffect(() => {
     getResourcesAction(undefined);
+    getTopStartupsAction(undefined);
   }, []);
 
   if (authLoading || resourcesLoading) {
     return (
-      <div className="container mx-auto py-8">
+      <div className="container mx-auto max-h-full py-8">
         <h1 className="mb-6 text-3xl font-bold">Resources</h1>
         <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
           {[1, 2, 3, 4, 5, 6].map((i) => (
@@ -43,11 +55,49 @@ export default function ResourcesPage() {
   }
 
   return (
-    <div className="container mx-auto p-8 py-8">
+    <div className="container mx-auto max-h-screen overflow-y-scroll px-6">
       <div className="flex flex-col gap-6">
         <div className="flex items-center justify-between">
           <h1 className="text-3xl font-bold">Resources</h1>
         </div>
+
+        {/* Top Performing Startups Card */}
+        {!topStartupsLoading && !topStartupsError && topStartups && topStartups.length > 0 && (
+          <Card className="bg-primary/5 border-primary/20">
+            <CardHeader>
+              <div className="flex items-center gap-2">
+                <Award className="text-primary h-5 w-5" />
+                <CardTitle>Top Performing Startups</CardTitle>
+              </div>
+              <CardDescription>
+                Startups that have accessed more resources than average
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+                {topStartups.map((startup) => (
+                  <div
+                    key={startup.startup_id}
+                    className="flex flex-col justify-between rounded-lg border p-4 shadow-sm"
+                  >
+                    <div className="flex items-start justify-between">
+                      <h3 className="line-clamp-1 text-lg font-semibold">{startup.name}</h3>
+                      <TrendingUp className="text-primary h-4 w-4" />
+                    </div>
+                    <div className="mt-2 flex items-center justify-between">
+                      <span className="text-muted-foreground text-sm">
+                        {startup.access_count} resources
+                      </span>
+                      <Badge variant="outline" className="bg-primary/10">
+                        Above Average
+                      </Badge>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </CardContent>
+          </Card>
+        )}
 
         <div className="space-y-4">
           <h2 className="text-2xl font-bold">All Available Resources</h2>
@@ -60,35 +110,37 @@ export default function ResourcesPage() {
               </CardContent>
             </Card>
           ) : resources && resources.length > 0 ? (
-            <ScrollArea className="h-[75vh]">
+            <div className="max-h-[75vh] overflow-y-auto pr-2">
               <div className="grid gap-4 pr-4 md:grid-cols-2 lg:grid-cols-3">
-                {resources.map((resource) => (
-                  <Card key={resource.resource_id} className="overflow-hidden">
-                    <CardHeader className="pb-2">
-                      <CardTitle className="text-xl">{resource.name}</CardTitle>
-                      <CardDescription className="line-clamp-2">
-                        {resource.description}
-                      </CardDescription>
-                    </CardHeader>
-                    <CardContent>
-                      <div className="mt-2 flex items-center justify-between">
-                        <Badge variant="outline" className="bg-primary/10">
-                          Resource #{resource.resource_id}
-                        </Badge>
-                        <a
-                          href={resource.link}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="text-primary inline-flex items-center gap-1 text-sm hover:underline"
-                        >
-                          View Resource <ExternalLink size={14} />
-                        </a>
-                      </div>
-                    </CardContent>
-                  </Card>
-                ))}
+                <>
+                  {resources.map((resource) => (
+                    <Card key={resource.resource_id} className="overflow-hidden">
+                      <CardHeader className="pb-2">
+                        <CardTitle className="text-xl">{resource.name}</CardTitle>
+                        <CardDescription className="line-clamp-2">
+                          {resource.description}
+                        </CardDescription>
+                      </CardHeader>
+                      <CardContent>
+                        <div className="mt-2 flex items-center justify-between">
+                          <Badge variant="outline" className="bg-primary/10">
+                            Resource #{resource.resource_id}
+                          </Badge>
+                          <a
+                            href={resource.link}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="text-primary inline-flex items-center gap-1 text-sm hover:underline"
+                          >
+                            View Resource <ExternalLink size={14} />
+                          </a>
+                        </div>
+                      </CardContent>
+                    </Card>
+                  ))}
+                </>
               </div>
-            </ScrollArea>
+            </div>
           ) : (
             <Card>
               <CardContent className="pt-6">

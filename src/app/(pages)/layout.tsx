@@ -24,6 +24,7 @@ export default function RootLayout({
             <div className="flex items-center gap-2 px-4">
               <SidebarTrigger className="-ml-1" />
               <Separator orientation="vertical" className="mr-2 h-4" />
+              <h1 className="text-lg font-semibold">{metadata.title?.toString() || 'Accelera'}</h1>
             </div>
           </header>
           <main className="h-full w-full overflow-hidden">

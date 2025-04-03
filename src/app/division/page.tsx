@@ -2,7 +2,7 @@ import { GalleryVerticalEnd } from 'lucide-react';
 import Image from 'next/image';
 
 import SignupImage from '@/assets/img/login-image.jpg'; // Assuming you have a signup image, or use the same as login
-import { DivisionForm } from '@/components/division-form';
+import { MostActiveStartups } from '@/components/dashboard/most-active-startups';
 
 export default function SignupPage() {
   return (
@@ -18,7 +18,7 @@ export default function SignupPage() {
         </div>
         <div className="flex flex-1 items-center justify-center">
           <div className="w-full max-w-full">
-            <DivisionForm />
+            <MostActiveStartups />
           </div>
         </div>
       </div>

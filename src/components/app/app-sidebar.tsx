@@ -1,7 +1,7 @@
 'use client';
 
 import * as React from 'react';
-import { Building, Calendar, FileStack, GalleryVerticalEnd, HandCoins, Users } from 'lucide-react';
+import { Building, Calendar, FileStack, GalleryVerticalEnd, HandCoins } from 'lucide-react';
 
 import { NavMain } from '@/components/app/nav-main';
 import { NavUser } from '@/components/app/nav-user';
@@ -35,11 +35,6 @@ const data = {
       title: 'Events',
       url: '/events',
       icon: Calendar,
-    },
-    {
-      title: 'Event Participation',
-      url: '/event-participation',
-      icon: Users,
     },
     {
       title: 'Investors',

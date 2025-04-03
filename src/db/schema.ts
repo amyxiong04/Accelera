@@ -35,7 +35,7 @@ export const INVESTOR_TABLE_SCHEMA = `
   );
 `;
 
-/**
+/* *
  * Schema for the investor_group table.
  */
 export const INVESTOR_GROUP_TABLE_SCHEMA = `

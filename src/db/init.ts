@@ -15,6 +15,7 @@ import {
   INVESTOR_TABLE_SCHEMA,
   INVESTOR_GROUP_TABLE_SCHEMA,
   BELONGS_TO_TABLE_SCHEMA,
+  FUNDING_ROUND_TABLE_SCHEMA,
 } from '@/db/schema';
 import { DUMMY_DATA } from './dummy-data';
 
@@ -58,6 +59,9 @@ export const createSchema = async () => {
 
     await sql.unsafe(EVENTS_TABLE_SCHEMA);
     console.log('Events table created successfully');
+
+    await sql.unsafe(FUNDING_ROUND_TABLE_SCHEMA);
+    console.log('Funding round table created successfully');
 
     console.log('Complete schema created successfully');
 

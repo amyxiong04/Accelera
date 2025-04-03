@@ -94,9 +94,22 @@ INSERT INTO event (name, location, description, event_type) VALUES
 -- Insert dummy attends relationships (startups attending events)
 INSERT INTO attends (event_id, startup_id, registration_date) VALUES
   (1, 1, '2023-10-01'),
-  (2, 2, '2023-09-15'),
+  (2, 1, '2023-10-01'),
+  (3, 1, '2023-10-01'),
+  (4, 1, '2023-10-01'),
+  (5, 1, '2023-10-01'),
+  (1, 2, '2023-09-15'),
   (3, 3, '2023-11-10'),
-  (4, 4, '2023-10-20'),
+  (1, 4, '2023-10-20'),
   (5, 5, '2023-11-25');
-  
+
+-- Insert dummy funding_round data
+INSERT INTO funding_round (round_no, amount_raised, round_label, date_closed, user_id, startup_id)  
+VALUES  
+    (1, 500000, 'Seed Round', '2024-03-15', 1, 3),  
+    (2, 2000000, 'Series A', '2025-06-20', 2, 1),  
+    (1, 750000, 'Seed Round', '2024-05-10', 3, 2),  
+    (2, 5000000, 'Series B', '2026-09-30', 4, 3), 
+    (3, 5000000, 'Series C', '2026-09-30', 2, 5),  
+    (4, 5000000, 'Series D', '2026-09-30', 2, 4);  
 `;

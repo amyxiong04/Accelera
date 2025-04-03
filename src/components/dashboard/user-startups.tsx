@@ -17,6 +17,7 @@ import { Badge } from '@/components/ui/badge';
 import { format } from 'date-fns';
 import { useAuth } from '@/context/AuthContext';
 import { CreateStartupDialog } from '../startup/create-startup-dialog';
+import { ResourceAccessDialog } from './resource-access-dialog';
 
 export const UserStartups = () => {
   const { user } = useAuth();
@@ -97,18 +98,23 @@ export const UserStartups = () => {
                 {startup.description || 'No description available'}
               </p>
             </CardContent>
-            <CardFooter className="flex justify-between border-t pt-4">
-              <Badge variant="outline">{startup.role}</Badge>
-              {startup.pitch_deck_url && (
-                <a
-                  href={startup.pitch_deck_url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-primary text-sm hover:underline"
-                >
-                  View Pitch Deck
-                </a>
-              )}
+            <CardFooter className="flex flex-col gap-3 border-t pt-4">
+              <div className="flex w-full justify-between">
+                <Badge variant="outline">{startup.role}</Badge>
+                {startup.pitch_deck_url && (
+                  <a
+                    href={startup.pitch_deck_url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-primary text-sm hover:underline"
+                  >
+                    View Pitch Deck
+                  </a>
+                )}
+              </div>
+              <div className="flex w-full justify-end">
+                <ResourceAccessDialog startupId={startup.startup_id} startupName={startup.name} />
+              </div>
             </CardFooter>
           </Card>
         ))}

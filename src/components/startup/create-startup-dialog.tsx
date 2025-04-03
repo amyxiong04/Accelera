@@ -83,8 +83,7 @@ export function CreateStartupDialog() {
       });
       setOpen(false);
 
-      // Dispatch a custom event to trigger refresh
-      window.dispatchEvent(new CustomEvent('startup-created'));
+      window.location.reload();
     }
   };
 
@@ -185,7 +184,6 @@ export function CreateStartupDialog() {
                 </SelectTrigger>
                 <SelectContent>
                   <SelectItem value="Founder">Founder</SelectItem>
-                  <SelectItem value="Co-founder">Co-founder</SelectItem>
                   <SelectItem value="CEO">CEO</SelectItem>
                   <SelectItem value="CTO">CTO</SelectItem>
                   <SelectItem value="Other">Advisor</SelectItem>

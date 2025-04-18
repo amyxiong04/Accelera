@@ -1,4 +1,4 @@
-# CPSC330 Main Project
+# Accelera
 
 ## Project Description
 

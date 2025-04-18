@@ -35,9 +35,9 @@ Before you begin, make sure you have the following installed:
    - Create a `.env` file in the root directory
    - Add the following environment variables:
      ```
-     NEXT_PUBLIC_SUPABASE_URL="https://pxzgjodggxjprpwjqzic.supabase.co"
-     NEXT_PUBLIC_SUPABASE_ANON_KEY="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InB4emdqb2RnZ3hqcHJwd2pxemljIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc0MTY2NzM5MCwiZXhwIjoyMDU3MjQzMzkwfQ.cMfdacGFFyU875esn1YdzDMaNh9Yx_KEP4tt5ncgD_Y"
-     NEXT_PUBLIC_DB_URL = "postgresql://postgres.pxzgjodggxjprpwjqzic:CPSC330Project@2025@aws-0-us-west-1.pooler.supabase.com:5432/postgres"
+     NEXT_PUBLIC_SUPABASE_URL=your-supabase-url
+     NEXT_PUBLIC_SUPABASE_ANON_KEY=your-anon-key
+     DATABASE_URL=your-database-url (only needed for server-side or admin access)
      ```
 4. **Run the Development Server**
 

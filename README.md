@@ -21,7 +21,7 @@ Before you begin, make sure you have the following installed:
 1. **Clone the repository**
 
    ```bash
-   git clone https://github.com/yourusername/Accelera.git
+   git clone https://github.com/amyxiong04/Accelera.git
    cd Accelera
    ```
 

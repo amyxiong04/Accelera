@@ -40,9 +40,9 @@ Before you begin, make sure you have the following installed:
    - Add the following environment variables:
 
      ```
-     NEXT_PUBLIC_SUPABASE_URL=https://pxzgjodggxjprpwjqzic.supabase.co/
-     NEXT_PUBLIC_SUPABASE_ANON_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
-     DATABASE_URL=postgresql://postgres:CPSC330Project%402025@aws-0-us-west-1.pooler.supabase.com:6543/postgres
+NEXT_PUBLIC_SUPABASE_URL="https://pxzgjodggxjprpwjqzic.supabase.co/"
+NEXT_PUBLIC_SUPABASE_ANON_KEY="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InB4emdqb2RnZ3hqcHJwd2pxemljIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc0MTY2NzM5MCwiZXhwIjoyMDU3MjQzMzkwfQ.cMfdacGFFyU875esn1YdzDMaNh9Yx_KEP4tt5ncgD_Y"
+NEXT_PUBLIC_DB_URL = postgresql://postgres.pxzgjodggxjprpwjqzic:[YOUR-PASSWORD]@aws-0-us-west-1.pooler.supabase.com:6543/postgres
      ```
 4. **Run the Development Server**
 

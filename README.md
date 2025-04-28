@@ -30,6 +30,10 @@ Before you begin, make sure you have the following installed:
    ```bash
    npm install
    ```
+   If running npm install leads to dependency conflicts, run the below command:
+   ```bash
+   npm install --legacy-peer-deps
+   ```
 
 3. **Environment Setup**
    - Create a `.env` file in the root directory

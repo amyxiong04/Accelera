@@ -21,8 +21,8 @@ Before you begin, make sure you have the following installed:
 1. **Clone the repository**
 
    ```bash
-   git clone https://github.com/yourusername/cpsc330-main-project.git
-   cd cpsc330-main-project
+   git clone https://github.com/yourusername/Accelera.git
+   cd Accelera
    ```
 
 2. **Install dependencies**

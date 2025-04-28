@@ -37,7 +37,7 @@ Before you begin, make sure you have the following installed:
      ```
      NEXT_PUBLIC_SUPABASE_URL=your-supabase-url
      NEXT_PUBLIC_SUPABASE_ANON_KEY=your-anon-key
-     DATABASE_URL=your-database-url (only needed for server-side or admin access)
+     NEXT_PUBLIC_DB_URL=postgresql://postgres.pxzgjodggxjprpwjqzic:[YOUR-PASSWORD]@aws-0-us-west-1.pooler.supabase.com:6543/postgres
      ```
 4. **Run the Development Server**
 

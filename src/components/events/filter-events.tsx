@@ -5,13 +5,22 @@ import { Button } from '@/components/ui/button';
 import { useServerAction } from '@/hooks/useServerAction';
 import { filterEvents } from '@/actions/events/filter-events';
 
+// Define the expected shape of one event
+type Event = {
+  event_id: string | number;
+  name: string;
+  event_type: string;
+  location: string;
+  date: string; // assuming it's an ISO string
+};
+
 export default function FilterEventsForm() {
   const [eventType, setEventType] = useState('');
   const [location, setLocation] = useState('');
 
   const {
     mutateAsync,
-    data: events,
+    data,
     isError,
     error,
   } = useServerAction(filterEvents);
@@ -25,6 +34,8 @@ export default function FilterEventsForm() {
 
     await mutateAsync(formData);
   };
+
+  const events = data as Event[] | undefined;
 
   return (
     <div className="text-white w-full max-w-md bg-black bg-opacity-80 p-8 rounded-md">
@@ -86,7 +97,7 @@ export default function FilterEventsForm() {
             {events.length > 0 ? (
               <ul className="space-y-2">
                 {events.map((event) => (
-                  <li key={event.event_id} className="border border-white p-3 rounded-md">
+                  <li key={String(event.event_id)} className="border border-white p-3 rounded-md">
                     <strong>{event.name}</strong><br />
                     Type: {event.event_type}<br />
                     Location: {event.location}<br />

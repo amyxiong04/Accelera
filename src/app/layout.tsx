@@ -2,14 +2,11 @@ import type { Metadata } from 'next';
 import { Figtree } from 'next/font/google';
 import './globals.css';
 
+// This should run before the nextjs app is mounted.
 import '../lib/startup';
 import { AuthProvider } from '@/context/AuthContext';
 import { TopProgressBar } from '@/components/ui/progress-bar';
 import { Toaster } from 'sonner';
-import { SchemaUpdater } from '@/components/app/schema-updater';
-import { SidebarProvider, SidebarInset, SidebarTrigger } from '@/components/ui/sidebar';
-import { AppSidebar } from '@/components/app/app-sidebar';
-import { Separator } from '@/components/ui/separator';
 
 const figtreeFont = Figtree({
   variable: '--font-figtree',
@@ -17,7 +14,7 @@ const figtreeFont = Figtree({
 });
 
 export const metadata: Metadata = {
-  title: 'Accelera',
+  title: 'Accelera - Auth',
   description: 'Startup Accelerator',
 };
 
@@ -33,26 +30,11 @@ export default function RootLayout({
       >
         <AuthProvider>
           <TopProgressBar />
-          <SidebarProvider>
-            <AppSidebar />
-            <SidebarInset>
-              <header className="flex h-16 shrink-0 items-center gap-2 transition-[width,height] ease-linear group-has-[[data-collapsible=icon]]/sidebar-wrapper:h-12">
-                <div className="flex items-center gap-2 px-4">
-                  <SidebarTrigger className="-ml-1" />
-                  <Separator orientation="vertical" className="mr-2 h-4" />
-                  <h1 className="text-lg font-semibold">{metadata.title?.toString() || 'Accelera'}</h1>
-                </div>
-              </header>
-              <main className="h-full w-full overflow-hidden">
-                <div className="flex h-full w-full items-center justify-center">{children}</div>
-              </main>
-            </SidebarInset>
-          </SidebarProvider>
+
+          {children}
           <Toaster />
-          <SchemaUpdater />
         </AuthProvider>
       </body>
     </html>
   );
 }
-

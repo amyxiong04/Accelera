@@ -4,6 +4,12 @@
 
 <b>Accelera</b> is a platform that connects companies with investors, mentors, accelerators, and other vital resources to promote relationships within the startup ecosystem. The program simplifies essential processes such as resource sharing, networking events, accelerator applications, mentoring access, and startup funding. Its goal is to streamline these interactions, encouraging startup growth and fostering collaboration.
 
+## Live Demo
+
+You can view the live version of Accelera here:  
+👉 https://accelera-rja1.vercel.app/
+
+
 ## Getting Started
 
 This guide will walk you through the steps required to set up and run the project on your local machine.

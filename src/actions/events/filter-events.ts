@@ -7,7 +7,9 @@ import { z } from 'zod';
 const FilterEventsSchema = z.object({
   event_type: z.string().optional(),
   location: z.string().optional(),
-  attributes: z.array(z.string()).optional(),
+  attributes: z
+    .array(z.enum(['event_id', 'name', 'event_type', 'location', 'description', 'date']))
+    .optional(),
 });
 
 export type FilterEventsFormData = z.infer<typeof FilterEventsSchema>;
@@ -29,6 +31,7 @@ export async function filterEvents(
       return { data: null, error: errorMessage };
     }
 
+    const selectedAttributes = result.data.attributes ?? [];
     const conditions: string[] = [];
     const values: string[] = [];
 
@@ -44,13 +47,13 @@ export async function filterEvents(
 
     // Default selection if no attributes provided
     const selectedColumns =
-      attributes.length > 0
-        ? attributes.join(', ')
+      selectedAttributes.length > 0
+        ? selectedAttributes.join(', ')
         : 'event_id, name, event_type, location, description';
 
     const query = `
       SELECT ${selectedColumns}
-      FROM Event
+      FROM event
       ${conditions.length > 0 ? 'WHERE ' + conditions.join(' AND ') : ''}
       ;
     `;

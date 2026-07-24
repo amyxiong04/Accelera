@@ -2,25 +2,17 @@
 
 ## Project Description
 
-<b>Accelera</b> is a platform that connects companies with investors, mentors, accelerators, and other vital resources to promote relationships within the startup ecosystem. The program simplifies essential processes such as resource sharing, networking events, accelerator applications, mentoring access, and startup funding. Its goal is to streamline these interactions, encouraging startup growth and fostering collaboration.
-
-## Live Demo
-
-You can view the live version of Accelera here:  
-👉 https://accelera-rja1.vercel.app/
-
+**Accelera** is a startup accelerator management platform for tracking startups, events, investors, resources, and user activity.
 
 ## Getting Started
 
-This guide will walk you through the steps required to set up and run the project on your local machine.
+This guide walks through the steps required to set up and run the project locally.
 
 ### Prerequisites
 
-Before you begin, make sure you have the following installed:
-
-- [Node.js](https://nodejs.org/) (v18 or newer)
-- [npm](https://www.npmjs.com/) (usually comes with Node.js)
-- [Git](https://git-scm.com/) (for version control)
+- [Node.js](https://nodejs.org/) v18 or newer
+- [npm](https://www.npmjs.com/)
+- [Git](https://git-scm.com/)
 
 ### Setup Instructions
 
@@ -36,29 +28,39 @@ Before you begin, make sure you have the following installed:
    ```bash
    npm install
    ```
-   If running npm install leads to dependency conflicts, run the below command:
+
+   If `npm install` has dependency conflicts, run:
+
    ```bash
    npm install --legacy-peer-deps
    ```
 
-3. **Environment Setup**
-   - Create a `.env` file in the root directory
-   - Add the following environment variables:
+3. **Environment setup**
 
-     ```
-      NEXT_PUBLIC_SUPABASE_URL=your_supabase_url
-      NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
-      DATABASE_URL=your_database_url
-     ```
-4. **Run the Development Server**
+   Create a `.env.local` file in the root directory and add your Postgres connection string:
+
+   ```env
+   DATABASE_URL=your_database_url
+   ```
+
+   For Supabase, use the Postgres connection string from your Supabase project settings.
+
+4. **Create and seed the database**
+
+   ```bash
+   npm run db:setup
+   ```
+
+5. **Run the development server**
 
    ```bash
    npm run dev
    ```
 
-   The application will be available at [http://localhost:3000](http://localhost:3000)
+   The application will be available at [http://localhost:3000](http://localhost:3000).
 
-5. **Build for Production**
+6. **Build for production**
+
    ```bash
    npm run build
    npm start
@@ -71,23 +73,29 @@ Before you begin, make sure you have the following installed:
 - `/src/actions` - Server actions for data mutation
 - `/src/lib` - Utility functions and configuration
 - `/src/hooks` - Custom React hooks
-- `/prisma` - Database schema and migrations
+- `/src/db` - Database schema and seed setup
+- `/sql` - Generated SQL schema files
 
 ## Features
 
 - Event participation tracking
 - Startup management
 - User authentication
+- Investor and resource management
 
 ## Technologies Used
 
 - [Next.js](https://nextjs.org/) - React framework
 - [TypeScript](https://www.typescriptlang.org/) - Type-safe JavaScript
 - [Tailwind CSS](https://tailwindcss.com/) - Utility-first CSS framework
+- [Postgres](https://www.postgresql.org/) - Relational database
 
-## Generating the schema.sql file
+## Generating The Schema SQL File
 
-1. Install bun
-2. From the root directory `cd scripts`
-3. Run `bun merge-sql.ts`
-4. View the result in `sql/schema.sql` file
+Run:
+
+```bash
+npx tsx scripts/merge-sql.ts
+```
+
+The merged schema is written to `sql/schema.sql`.

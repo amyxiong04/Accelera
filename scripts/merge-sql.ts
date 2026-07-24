@@ -16,9 +16,9 @@ import {
   ACCELERATOR_TABLE_SCHEMA,
   EVENTS_TABLE_SCHEMA,
   ATTENDS_TABLE_SCHEMA,
-  EVENT_TABLE_SCHEMA,
+  FUNDING_ROUND_TABLE_SCHEMA,
 } from '../src/db/schema';
-import { DUMMY_DATA } from '@/db/dummy-data';
+import { DUMMY_DATA } from '../src/db/dummy-data';
 
 /**
  * Extracts the SQL statements from a schema string.
@@ -47,7 +47,7 @@ function mergeSchemas(): void {
     ACCELERATOR_TABLE_SCHEMA,
     EVENTS_TABLE_SCHEMA,
     ATTENDS_TABLE_SCHEMA,
-    EVENT_TABLE_SCHEMA,
+    FUNDING_ROUND_TABLE_SCHEMA,
   ];
 
   // Extract SQL from each schema and join with newlines

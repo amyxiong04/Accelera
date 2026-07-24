@@ -181,7 +181,8 @@ export const EVENTS_TABLE_SCHEMA = `
     name VARCHAR(100),
     location VARCHAR(100),
     description VARCHAR(500),
-    event_type VARCHAR(30)
+    event_type VARCHAR(30),
+    date DATE
   );
 `;
 
@@ -207,18 +208,9 @@ export type EventTableType = {
   name: string;
   event_type?: string;
   location?: string;
+  description?: string;
   date?: string;
 };
-
-export const EVENT_TABLE_SCHEMA = `
-  CREATE TABLE IF NOT EXISTS Event (
-    event_id SERIAL PRIMARY KEY,
-    name VARCHAR(255) NOT NULL,
-    event_type VARCHAR(100),
-    location VARCHAR(100),
-    date DATE NOT NULL
-  );
-`;
 
 export const FUNDING_ROUND_TABLE_SCHEMA = `
   DROP TABLE IF EXISTS funding_round CASCADE;

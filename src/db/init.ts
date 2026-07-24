@@ -1,6 +1,6 @@
 'use server';
 
-import { sql } from '@/lib/db';
+import { sql } from '../lib/db';
 
 import {
   USER_TABLE_SCHEMA,
@@ -16,7 +16,7 @@ import {
   INVESTOR_GROUP_TABLE_SCHEMA,
   BELONGS_TO_TABLE_SCHEMA,
   FUNDING_ROUND_TABLE_SCHEMA,
-} from '@/db/schema';
+} from './schema';
 import { DUMMY_DATA } from './dummy-data';
 
 /**
@@ -54,11 +54,11 @@ export const createSchema = async () => {
     await sql.unsafe(ACCESSES_TABLE_SCHEMA);
     console.log('Accesses table created successfully');
 
-    await sql.unsafe(ATTENDS_TABLE_SCHEMA);
-    console.log('Attends table created successfully');
-
     await sql.unsafe(EVENTS_TABLE_SCHEMA);
     console.log('Events table created successfully');
+
+    await sql.unsafe(ATTENDS_TABLE_SCHEMA);
+    console.log('Attends table created successfully');
 
     await sql.unsafe(FUNDING_ROUND_TABLE_SCHEMA);
     console.log('Funding round table created successfully');
@@ -68,6 +68,7 @@ export const createSchema = async () => {
     await sql.unsafe(DUMMY_DATA);
     console.log('Dummy data inserted successfully');
   } catch (error) {
-    console.error('Error creating user table:', error);
+    console.error('Error creating schema:', error);
+    throw error;
   }
 };

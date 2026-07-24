@@ -5,7 +5,9 @@ import { ServerActionResult } from '@/hooks/useServerAction';
 import { z } from 'zod';
 
 const ProjectionSchema = z.object({
-  attributes: z.array(z.enum(['event_id', 'name', 'event_type', 'location', 'date'])).nonempty(),
+  attributes: z
+    .array(z.enum(['event_id', 'name', 'event_type', 'location', 'description', 'date']))
+    .nonempty(),
 });
 
 export type ProjectionFormData = z.infer<typeof ProjectionSchema>;
@@ -28,7 +30,7 @@ export async function projectEvents(
 
     const selectedAttrs = parsed.data.attributes.join(', ');
 
-    const results: ProjectionResult = await sql.unsafe(`SELECT ${selectedAttrs} FROM Event;`);
+    const results: ProjectionResult = await sql.unsafe(`SELECT ${selectedAttrs} FROM event;`);
 
     return { data: results };
   } catch (err) {

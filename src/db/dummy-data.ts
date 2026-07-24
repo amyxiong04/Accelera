@@ -1,4 +1,4 @@
-import { hashPassword } from '@/lib/hash-password';
+import { hashPassword } from '../lib/hash-password';
 
 const useHashedPasswords = [hashPassword('password123')];
 
